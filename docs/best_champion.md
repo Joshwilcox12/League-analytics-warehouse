@@ -14,10 +14,10 @@ Knowing which champions a player performs best on helps them identify which cham
 
 ## Metrics
 
-cs/min
-kda
-win rate
-games played
+- cs/min
+- kda
+- win rate
+- games played
 
 
 
