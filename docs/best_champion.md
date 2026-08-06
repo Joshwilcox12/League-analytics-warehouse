@@ -23,7 +23,7 @@ Knowing which champions a player performs best on helps them identify which cham
 
 ## API Endpoints
 
-TBD
+
 
 ## Required Fields
 

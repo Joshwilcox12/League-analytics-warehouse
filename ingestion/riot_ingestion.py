@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 import os
 import requests
-
+import json
 game_name = "stonedfly"
 game_tag = "1998"
 
@@ -54,3 +54,5 @@ player_match = match_response.json()
 print(f"Found account: {account_data['gameName']}#{account_data['tagLine']}")
 print(f"Found {len(match_ids)} recent matches.")
 print(f"Downloaded match: {match_id}")
+with open("match.json", "w") as f:
+    json.dump(player_match, f, indent=4)
