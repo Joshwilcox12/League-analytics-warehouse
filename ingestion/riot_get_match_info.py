@@ -1,7 +1,13 @@
 from dotenv import load_dotenv
+from pathlib import Path
 import os
 import requests
 import json
+
+
+sample_dir = Path("data") / "samples" / "match_samples"
+sample_dir.mkdir(parents=True, exist_ok=True)
+
 game_name = "stonedfly"
 game_tag = "1998"
 
@@ -54,5 +60,11 @@ player_match = match_response.json()
 print(f"Found account: {account_data['gameName']}#{account_data['tagLine']}")
 print(f"Found {len(match_ids)} recent matches.")
 print(f"Downloaded match: {match_id}")
-with open("match.json", "w") as f:
+
+
+output_file = sample_dir / f"{match_id}.json"
+
+with output_file.open("w") as f:
     json.dump(player_match, f, indent=4)
+
+print(f"Saved to {output_file}")
