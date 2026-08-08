@@ -1,0 +1,7 @@
+sources:
+  - name: raw
+    database: LEAGUE_ANALYTICS
+    schema: raw
+    tables:
+    - name: riot_matches
+      identifier: RIOT_MATCHES
