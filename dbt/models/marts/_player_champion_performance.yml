@@ -1,0 +1,10 @@
+models:
+  - name: player_champion_performance
+    columns:
+      - name: champion_name
+        data_tests:
+          - not_null
+
+      - name: puuid
+        data_tests:
+          - not_null 
