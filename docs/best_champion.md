@@ -22,12 +22,25 @@ Knowing which champions a player performs best on helps them identify which cham
 
 
 ## API Endpoints
-
-
+- /riot/account/v1/accounts/by-riot-id/{gameName}/{tagLine}
+- /lol/match/v5/matches/by-puuid/{puuid}/ids 
+- /lol/match/v5/matches/{matchId}
 
 ## Required Fields
+- gameDuration
+- puuid
+- game_name
+- tag_line
+- champion_name
+- kills
+- deaths
+- assists
+- win
+- totalMinionsKilled
+- totalEnemyJungleMinionsKilled
+- totalAllyJungleMinionsKilled
+- goldEarned
 
-TBD
 
 
 ## Notes
