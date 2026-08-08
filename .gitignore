@@ -1,6 +1,7 @@
 .venv/
 .env
 data/samples/
+logs/
 # dbt
 
 dbt/target/
