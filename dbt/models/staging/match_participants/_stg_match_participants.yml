@@ -1,0 +1,15 @@
+models:
+  - name: stg_match_participants
+    columns:
+      - name: match_participant_key
+        data_tests:
+          - unique
+          - not_null
+
+      - name: match_id
+        data_tests:
+          - not_null
+
+      - name: puuid
+        data_tests:
+          - not_null

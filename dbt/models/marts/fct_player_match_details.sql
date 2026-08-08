@@ -1,0 +1,1 @@
+select * from {{ ref('stg_match_participants')}}

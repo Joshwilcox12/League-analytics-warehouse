@@ -1,0 +1,7 @@
+models:
+  - name: dim_players
+    columns:
+      - name: puuid
+        data_tests:
+          - unique
+          - not_null
