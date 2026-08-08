@@ -1,5 +1,5 @@
 models:
-  - name: fct_player_match_details
+  - name: fct_player_matches
     columns:
       - name: match_participant_key
         data_tests:
