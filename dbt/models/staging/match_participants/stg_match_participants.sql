@@ -18,6 +18,8 @@ select
     p.value:kills::int as kills,
     p.value:deaths::int as deaths,
     p.value:assists::int as assists,
+    p.value:challenges:damagePerMinute::int as dpm,
+    p.value:challenges:teamDamagePercentage::number(10,8) as team_damage_percent,
     --farming
     p.value:totalMinionsKilled::int as minion_kills,
     p.value:totalEnemyJungleMinionsKilled::int as enemy_jungle_kills,
@@ -28,3 +30,8 @@ from {{ source('raw', 'riot_matches') }} r,
 lateral flatten(
     input => r.payload:info:participants
 ) p
+
+qualify row_number() over (
+    partition by match_id, puuid
+    order by loaded_at desc
+) = 1
