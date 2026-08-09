@@ -2,6 +2,7 @@
 .env
 data/samples/
 logs/
+.streamlit/secrets.toml
 # dbt
 
 dbt/target/
