@@ -31,6 +31,83 @@ As a player,
 
 ---
 
+
+---
+
+
+
+
+
+# Business Process: Player Match Performance
+
+Grain:
+One row per player per match.
+
+Dimensions:
+- dim_player
+- dim_champion
+- dim_date
+- dim_queue
+
+
+Fact Table:
+- fact_player_match
+
+Core Facts:
+- kills
+- deaths
+- assists
+- win
+- total_cs
+- damage_to_champions
+- vision_score
+- which_side
+- game_duration_seconds
+- first_death_time_seconds
+- was_first_blood_victim
+- deaths_before_5_min
+- deaths_before_10_min
+
+identifiers:
+- match_id
+- team_side
+
+# Metrics
+
+win_rate = wins / games_played
+
+kda = (kills + assists) / deaths
+
+cs_per_min = total_cs / game_duration_minutes
+
+damage_per_min = damage_to_champions / game_duration_minutes
+
+
+
+# Business Process: Team Match Performance
+
+Grain:
+One row per team per match
+
+Dimensions:
+- dim_date
+- dim_queue
+
+Identifiers / Attributes:
+- match_id
+- team_side
+- soul_type
+
+Measures / Flags:
+- won
+- got_soul
+- first_dragon
+- dragons_killed
+- barons_killed
+- got_first_blood
+- first_tower
+
+
 # Business Questions
 
 1. Which champions do I perform best on?
@@ -44,7 +121,6 @@ As a player,
 
 ---
 
-# Metrics
 
 ## Performance
 
