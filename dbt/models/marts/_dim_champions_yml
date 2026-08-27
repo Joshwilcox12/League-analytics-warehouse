@@ -1,0 +1,7 @@
+models:
+  - name: dim_champions
+    columns:
+      - name: puuid
+        data_tests:
+          - unique
+          - not_null
