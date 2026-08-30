@@ -21,9 +21,11 @@ players = [
 ]
 
 
-load_dotenv()
+load_dotenv(override=True)
 
 api_key = os.getenv("RIOT_API_KEY")
+
+
 
 if api_key is None:
     raise ValueError("RIOT_API_KEY was not found")
