@@ -12,12 +12,7 @@ sample_dir.mkdir(parents=True, exist_ok=True)
 
 # Players we want match history for
 players = [
-    ("stonedfly", "1998"),
-    ("masterspacewater", "NA1"),
-    ("blackythunder", "NA1"),
-    ("mood swings", "9236"),
-    ("ohwillybilly", "NA1"),
-    ("21 Drew", "TTV"),
+    ("stonedfly", "1998")
 ]
 
 
@@ -76,7 +71,7 @@ for game_name, game_tag in players:
     params = {
         "queue": 420,
         "start": 0,
-        "count": 100
+        "count": 1
     }
 
     match_ids_response = requests.get(

@@ -144,11 +144,13 @@ else:
         (match_id, loaded_at, payload)
     SELECT %s, CURRENT_TIMESTAMP(), PARSE_JSON(%s)
     """
-
-    cursor.executemany(
-        insert_query,
-        matches_to_insert
-    )
+    print(insert_query)
+    print(matches_to_insert[:2])
+    print(type(matches_to_insert))
+    # cursor.execute(
+    #     insert_query,
+    #     matches_to_insert
+    # )
 
 
 
