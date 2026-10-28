@@ -3,6 +3,8 @@ import json
 import os
 from dotenv import load_dotenv
 import snowflake.connector
+import time
+
 
 load_dotenv()
 #first connect to snowflake database raw table
@@ -35,6 +37,17 @@ except snowflake.connector.errors.DatabaseError as e:
         print("Connected")
     else:
         raise
+print("Connected to Snowflake")
+
+
+
+
+
+
+
+
+
+
 
 
 #get api key and set global variable
@@ -48,7 +61,18 @@ player = [("stonedfly","1998"),
            ("blackythunder", "NA1"),
                ("mood swings", "9236"),
                ("ohwillybilly", "NA1"),
-               ("21 Drew", "TTV")]
+               ("21 Drew", "TTV"),
+               ("kuronin", "NA1"),
+               ("meeku", "zed"),
+               ("PickleRichard","CLOWN"),
+               ("Vintram", "Vinny")]
+
+
+
+
+
+
+
 
 #first get unique id using player name/tag api
 
@@ -59,11 +83,17 @@ def get_puuid(player):
         url = f"https://americas.api.riotgames.com/riot/account/v1/accounts/by-riot-id/{game_name}/{tag_line}"
 
         response = requests.get(url,headers=headers,timeout=30)
-        
+        response.raise_for_status()
         puuid = response.json()["puuid"]
         all_puuid.append(puuid)
     print(f"Found {len(all_puuid)}")     
     return all_puuid
+
+
+
+
+
+
 
 
 #now we need to look up the last 100 match id of each player
@@ -79,7 +109,7 @@ def get_match_id(all_puuid):
         url = f"https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/{puuid}/ids"
 
         response = requests.get(url,headers=headers,params=params,timeout=30)
-        
+        response.raise_for_status()
 
         match_id = response.json()
     
@@ -111,6 +141,12 @@ def query_snowflake_unique_match_id(all_match_id):
 
     return rows
 
+
+
+
+
+
+
 def download_unique_matches(match_ids):
     match_data = []
     for match in match_ids:
@@ -118,22 +154,31 @@ def download_unique_matches(match_ids):
         url = f'https://americas.api.riotgames.com/lol/match/v5/matches/{match_id}'
         response = requests.get(url,headers=headers,timeout=30)
 
-        data = response.json()
-
-        match_data.append(data)
+        response.raise_for_status()
+        values = (response.json(),match_id)
+        match_data.append(values)
+        time.sleep(1.3)
     return match_data
+
+
+
+
+
+
+
+
+
 
 def upload_matches_to_snowflake(match_data):
      cursor = cnx.cursor()
-
+    
      total_list = []       
-     for match in match_data:
-
-                    match_id = match['metadata']['matchId']
+     for i, (match, match_id) in enumerate(match_data,start =1):
+                    print(f"uploading {match_id}, {i} out of  {len(match_data)}")
                     payload = json.dumps(match)
                     values = (match_id, payload)
                     total_list.append(values)
-
+     
      cursor.execute("""
             CREATE TEMPORARY TABLE TEMP_RIOT_MATCHES (
                 match_id VARCHAR,
