@@ -6,7 +6,7 @@ import snowflake.connector
 import time
 
 
-load_dotenv()
+load_dotenv(override=True)
 #first connect to snowflake database raw table
 try:
     cnx = snowflake.connector.connect(
@@ -53,6 +53,7 @@ print("Connected to Snowflake")
 #get api key and set global variable
 
 riot_api_key = os.getenv("RIOT_API_KEY")
+print("API key loaded:", bool(riot_api_key))
 headers = {"X-Riot-Token": riot_api_key}
 
 #client game name/tag
@@ -86,7 +87,7 @@ def get_puuid(player):
         response.raise_for_status()
         puuid = response.json()["puuid"]
         all_puuid.append(puuid)
-    print(f"Found {len(all_puuid)}")     
+    print(f"Found {len(all_puuid)} clients to get data for. ")     
     return all_puuid
 
 
