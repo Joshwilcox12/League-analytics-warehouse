@@ -40,3 +40,6 @@ left join {{ ref('dim_queue_type') }} q
 
 left join {{ ref('dim_date') }} d
     on to_number(to_char(s.game_start_timestamp, 'YYYYMMDD')) = d.date_key
+
+WHERE s.is_remake = FALSE
+AND s.queue_id = 420

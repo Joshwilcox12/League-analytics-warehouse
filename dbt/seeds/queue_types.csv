@@ -1,3 +1,4 @@
+queue_id,queue_name
 0,Custom Games
 2,Normal Blind Pick (5v5)
 4,Ranked Solo (5v5)
@@ -49,6 +50,7 @@
 600,Blood Hunt Assassin
 610,Dark Star Singularity
 700,Clash
+710,Classic
 720,ARAM Clash
 800,Co-op vs AI Intermediate 3v3
 810,Co-op vs AI Intro 3v3

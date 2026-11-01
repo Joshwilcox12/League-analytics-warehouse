@@ -25,7 +25,8 @@ select
     p.value:totalEnemyJungleMinionsKilled::int as enemy_jungle_kills,
     p.value:totalAllyJungleMinionsKilled::int as ally_jungle_kills,
     p.value:goldEarned::int as gold_earned,
-    p.value:win::boolean as win
+    p.value:win::boolean as win,
+    p.value:gameEndedInEarlySurrender::BOOLEAN AS is_remake
 from {{ source('raw', 'riot_matches') }} r,
 lateral flatten(
     input => r.payload:info:participants
