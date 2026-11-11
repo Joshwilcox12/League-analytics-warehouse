@@ -24,20 +24,22 @@ The primary focus of this project is to apply analytics engineering principles t
 - **Data Visualization:** Build dashboards that allow users to explore player and team performance.
 - **Pipeline Reliability:** Handle duplicate records, API limitations, and unexpected data issues throughout the pipeline.
 
+
 ## League Analytics Warehouse — Architecture
 
+```mermaid
 flowchart TD
     A["Riot Games API"] --> B["Python Ingestion"]
-    B --> C["Snowflake RAW<br/>RIOT_MATCHES (VARIANT)"]
+    B --> C["Snowflake RAW - RIOT_MATCHES"]
     C --> D["dbt Staging Models"]
     D --> E["dbt Analytics Marts"]
     E --> F["Snowflake Analytics Tables"]
-    F -.-> G["Metabase Dashboard<br/>(Planned)"]
+    F -.-> G["Metabase Dashboard (Planned)"]
 
-    B1["Player PUUID Lookup<br/>Match ID Collection<br/>Duplicate Filtering<br/>Batch Loading"] -.-> B
+    B1["PUUID Lookup / Match IDs / Deduplication / Batch Loading"] -.-> B
 
     E --> H["Player Match Facts"]
-    E --> I["Player & Champion Dimensions"]
+    E --> I["Player and Champion Dimensions"]
     E --> J["Champion Performance"]
 
     classDef source fill:#dceafe,stroke:#6091c9,color:#172b4d
@@ -51,3 +53,5 @@ flowchart TD
     class C,F warehouse
     class D,E,H,I,J transform
     class G planned
+```
+
