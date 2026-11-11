@@ -1,53 +1,53 @@
-# League of Legends Analytics Engineering Pipeline
+# Competitive Gaming Analytics | End-to-End Analytics Engineering Project
 
-## Project Overview
+## Overview
 
-The goal of this project is to learn and apply data engineering and analytics engineering concepts through hands-on experience.
+This project demonstrates an end-to-end analytics engineering workflow using match data collected from the Riot Games API.
 
-I chose League of Legends because it's something I'm passionate about, and I wanted to build a project around data I genuinely find interesting.
+The goal is to transform raw League of Legends match data into reliable, analytics-ready datasets that allow players to understand their performance, identify strengths and weaknesses, and make data-driven decisions to improve their gameplay.
 
-The idea is to create an analytics service that helps my friends and other players understand their performance in ranked League of Legends, identify areas for improvement, and track their progress over time.
+The project is designed to answer questions such as:
 
-## Project Development
+- **Champion Performance:** Which champions do I perform best with, based on win rate, KDA, and other performance metrics?
+- **Player Performance:** How does my performance vary across different matches and champions?
+- **Gameplay Analysis:** How do metrics such as damage dealt, vision score, and early-game deaths relate to match outcomes?
+- **Team Performance:** How do team objectives, such as dragons, barons, and first towers, relate to winning games?
 
-### 1. Data Ingestion — Python, Riot API, and Snowflake
+## Project Objectives
 
-I started by building a basic Python pipeline to retrieve match data from the Riot Games API and load the raw JSON into Snowflake.
+The primary focus of this project is to apply analytics engineering principles to a real-world data pipeline, including:
 
-My initial goal was simply to get data from the API into a data warehouse before worrying about optimization or best practices.
+- **Data Ingestion:** Extract match data from the Riot Games API using Python and load it into Snowflake.
+- **Data Modeling:** Transform nested JSON data into structured fact and dimension tables using dbt.
+- **Data Quality:** Implement automated tests to validate data integrity, uniqueness, and metric correctness.
+- **Metric Definitions:** Establish consistent definitions for metrics such as win rate, KDA, and champion performance.
+- **Data Visualization:** Build dashboards that allow users to explore player and team performance.
+- **Pipeline Reliability:** Handle duplicate records, API limitations, and unexpected data issues throughout the pipeline.
 
-### 2. Data Transformation — dbt and Data Modeling
+## League Analytics Warehouse — Architecture
 
-Next, I began learning dbt fundamentals and dimensional data modeling.
+flowchart TD
+    A["Riot Games API"] --> B["Python Ingestion"]
+    B --> C["Snowflake RAW<br/>RIOT_MATCHES (VARIANT)"]
+    C --> D["dbt Staging Models"]
+    D --> E["dbt Analytics Marts"]
+    E --> F["Snowflake Analytics Tables"]
+    F -.-> G["Metabase Dashboard<br/>(Planned)"]
 
-I approached the models from a business perspective, thinking about what information players would want to see and how the data should be structured to answer those questions.
+    B1["Player PUUID Lookup<br/>Match ID Collection<br/>Duplicate Filtering<br/>Batch Loading"] -.-> B
 
-This includes analyzing individual match performance, champion performance, and ranked progression.
+    E --> H["Player Match Facts"]
+    E --> I["Player & Champion Dimensions"]
+    E --> J["Champion Performance"]
 
-### 3. Pipeline Improvements — Current Focus
+    classDef source fill:#dceafe,stroke:#6091c9,color:#172b4d
+    classDef ingest fill:#fff0ce,stroke:#d6a344,color:#493713
+    classDef warehouse fill:#d9f2ef,stroke:#4a9d95,color:#164b46
+    classDef transform fill:#fce5dc,stroke:#d88970,color:#653728
+    classDef planned fill:#eeeeee,stroke:#888,stroke-dasharray:5 5,color:#555
 
-I'm currently revisiting my Python ingestion pipeline to improve its structure, reliability, error handling, and overall code quality.
-
-My goal is to move beyond a script that simply works and learn how to build a maintainable, production-style data pipeline.
-
-Once I'm satisfied with the ingestion process, I plan to revisit and improve my dbt models using the same approach.
-
-### 4. Reporting and Visualization — Planned
-
-The final phase will be to connect the transformed data to Looker and build dashboards that present useful insights into player performance.
-
-The goal is to make the data easy to understand and actionable for someone trying to improve at League of Legends.
-
-## Project Status
-
-**Work in progress.**
-
-This project is primarily a learning experience. I'm continuously improving it as I learn more about Python, Snowflake, dbt, data modeling, and analytics engineering best practices.
-
-## Learning Approach
-
-I use documentation, online resources, and AI tools to help me learn and develop this project.
-
-AI has been useful for understanding unfamiliar concepts, troubleshooting errors, reviewing code, and exploring better implementation approaches.
-
-My goal is to understand the code I write, the decisions behind it, and how to improve the pipeline as I develop my skills.
+    class A source
+    class B,B1 ingest
+    class C,F warehouse
+    class D,E,H,I,J transform
+    class G planned
