@@ -3,6 +3,7 @@
 data/samples/
 logs/
 .streamlit/secrets.toml
+.DS_Store
 # dbt
 
 dbt/target/
