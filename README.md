@@ -101,3 +101,31 @@ I also created a champion performance model to calculate metrics such as games p
 **Fact Table Grain**
 
 The grain for `fct_player_matches` is one row per player per match. I chose this because each player has their own performance statistics within a match. This allows me to analyze individual player performance and aggregate results by champion across multiple matches.
+
+## Data Quality & Testing
+
+I used dbt tests to check data quality in both staging and marts models.
+
+The main tests I implemented were:
+
+Unique: Checks that important identifiers, such as match-participant keys and player PUUIDs, do not contain duplicates.
+
+Not Null: Checks that important fields, such as match IDs, PUUIDs, and champion keys, are not missing values.
+
+These tests help catch data issues before the tables are used for analysis.
+
+For example, duplicate match-participant records could cause incorrect game counts and win rates.
+
+Additional tests for business rules and metric calculations are planned.
+
+Future Improvements
+
+Data Visualization: Build a Metabase dashboard to explore player and champion performance.
+
+Team Performance: Create a team-level fact table to analyze objectives such as dragons, barons, and towers.
+
+Additional Data Tests: Validate business rules, participant counts, and calculated metrics.
+
+Pipeline Reliability: Improve error handling, retry logic, and ingestion monitoring.
+
+Orchestration: Explore scheduling and automating the ingestion and transformation workflow.
