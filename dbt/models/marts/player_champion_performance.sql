@@ -49,8 +49,6 @@ with calculations as (
 )
 
 select
-    c.puuid,
-
     p.game_name,
     p.tag_line,
 
